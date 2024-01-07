@@ -1,12 +1,17 @@
 <template>
-    <RouterView />
+    <GlobalNavbar />
+    <main class="container">
+        <RouterView />
+    </main>
 </template>
 
 <script setup>
-import { RouterView, useRouter } from 'vue-router';
+import { RouterView } from 'vue-router';
+import { provide } from 'vue';
+import GlobalNavbar from './components/GlobalNavbar.vue'
 
-const router = useRouter()
+// const userId = window.Telegram.WebApp
+const userId = 896678539
 
-const userId = window.Telegram.WebApp
-router.push({ name: 'contacts-list', params: { userId: `${userId}` } })
+provide('userId', userId)
 </script>

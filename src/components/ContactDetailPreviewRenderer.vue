@@ -4,7 +4,7 @@
       :src="contact.to_user.profile_photo_url">
     <div class="card-body py-4">
       <p class="card-title">Контакт: {{ contact.private_name }}</p>
-      <p v-if="contact.private_name != contact.public_name" class="card-subtitle">Публичное имя: {{ contact.public_name }}</p>
+      <p v-if="contact.private_name !== contact.public_name" class="card-subtitle">Публичное имя: {{ contact.public_name }}</p>
     </div>
   </RouterLink>
 </template>

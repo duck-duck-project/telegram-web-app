@@ -3,14 +3,18 @@ import ContactView from './views/ContactView.vue'
 import ErrorNotFoundView from './views/ErrorNotFoundView.vue'
 
 export const routes = [
-  { 
-    name: 'not-found', 
-    path: '/:pathMatch(.*)*', 
+  {
+    path: '/',
+    redirect: { name: 'contacts-list' },
+  },
+  {
+    name: 'not-found',
+    path: '/:pathMatch(.*)*',
     component: ErrorNotFoundView,
-   },
+  },
   {
     name: 'contacts-list',
-    path: '/users/:userId/contacts',
+    path: '/contacts',
     component: ContactsView,
   },
   {
@@ -19,8 +23,3 @@ export const routes = [
     component: ContactView,
   },
 ]
-node_modules/
-dist/
-npm-debug.log
-yarn-error.log
-.vscode

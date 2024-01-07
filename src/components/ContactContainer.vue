@@ -1,7 +1,6 @@
 <template>
   <LoadingSpinner v-if="isFetching" />
-  <ContactRenderer @show-contacts-list="onShowContactList" @update-contact="onUpdateContact"
-    @delete-contact="onDeleteContact" v-else :contact="contact" />
+  <ContactRenderer @update-contact="onUpdateContact" @delete-contact="onDeleteContact" v-else :contact="contact" />
 </template>
 
 <script setup>
@@ -20,11 +19,11 @@ const props = defineProps({
 const url = `${import.meta.env.VITE_API_BASE_URL}/contacts/${props.contactId}/`
 const router = useRouter()
 
-const { isFetching, data: contact } = useFetch(url).json()
+const { isFetching, data: contact } = useFetch(url, { refetch: true }).json()
 
 
 const onUpdateContact = (userId, publicName, privateName, isHidden) => {
-  router.push({ name: 'contacts-list', params: { userId }, query: { isUpdated: true } })
+  router.push({ name: 'contacts-list', query: { isUpdated: true } })
   useFetch(url).put({
     private_name: privateName,
     public_name: publicName,
@@ -34,10 +33,6 @@ const onUpdateContact = (userId, publicName, privateName, isHidden) => {
 
 const onDeleteContact = userId => {
   useFetch(url).delete()
-  router.push({ name: 'contacts-list', params: { userId }, query: { isDeleted: true } })
-}
-
-const onShowContactList = userId => {
-  router.push({ name: 'contacts-list', params: { userId } })
+  router.push({ name: 'contacts-list', query: { isDeleted: true } })
 }
 </script>

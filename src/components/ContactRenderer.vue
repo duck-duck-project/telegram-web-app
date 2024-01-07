@@ -13,15 +13,26 @@
       <label class="form-check-label" for="form-is-hidden">Скрыть контакт</label>
     </div>
     <div class="d-flex column-gap-2 my-2">
-      <button @click="$emit('showContactsList', contact.of_user.id)" class="btn btn-secondary">Назад</button>
-      <button @click="$emit('updateContact', contact.of_user.id, publicName, privateName, isHidden)" type="button" class="btn btn-success">Сохранить</button>
-      <button @click="$emit('deleteContact', contact.of_user.id)" type="button" class="btn btn-outline-danger ml-3">Удалить</button>
+      <RouterLink :to="{name: 'contacts-list'}" class="btn btn-secondary" type="button">
+        <i class="bi bi-arrow-left-square"></i>
+        Назад
+      </RouterLink>
+      <button @click="$emit('updateContact', contact.of_user.id, publicName, privateName, isHidden)" type="button"
+        class="btn btn-success">
+        <i class="bi bi-check-square"></i>
+        Сохранить
+      </button>
+      <button @click="$emit('deleteContact', contact.of_user.id)" type="button" class="btn btn-outline-danger ml-3">
+        <i class="bi bi-x-square"></i>
+        Удалить
+      </button>
     </div>
   </form>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const props = defineProps({
   contact: Object,
